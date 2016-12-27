@@ -1,0 +1,1811 @@
+{
+  "package": "AmazonGlacier",
+  "tagline": "Amazon Glacier API",
+  "description": "Amazon Glacier is an extremely low-cost storage service that provides durable storage with security features for data archiving and backup.",
+  "image": "http://logo.clearbit.com/amazon.com",
+  "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-AmazonGlacier-package",
+  "keywords": [
+    "API",
+    "AWS",
+    "storage",
+    "archiving",
+    "backup"
+  ],
+  "accounts": {
+    "domain": "amazon.com",
+    "credentials": [
+      "apiKey",
+      "apiSecret"
+    ]
+  },
+  "blocks": [
+    {
+      "name": "createVault",
+      "description": "This operation creates a new vault with the specified name.  The name of the vault must be unique within a region for an AWS account.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "addTagsToVault",
+      "description": "This operation adds the specified tags to a vault. Each tag is composed of a key and a value. Each vault can have up to 50 tags.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "tags",
+          "type": "JSON",
+          "info": "Json object. The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string. See README for more details.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "setVaultAccessPolicy",
+      "description": "This operation configures an access policy for a vault and will overwrite an existing policy.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "policy",
+          "type": "JSON",
+          "info": "Json object. The vault access policy as a JSON string.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "configureVaultNotification",
+      "description": "This operation configures notifications that will be sent when specific events happen to a vault. By default, you don't get any notifications.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "events",
+          "type": "JSON",
+          "info": "Array of strings. An array of one or more events for which you want Amazon Glacier to send notification. Valid Values: ArchiveRetrievalCompleted; InventoryRetrievalCompleted",
+          "required": true
+        },
+        {
+          "name": "SNSTopic",
+          "type": "String",
+          "info": "The Amazon SNS topic ARN.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVaults",
+      "description": "This operation lists all vaults owned by the calling user's account. The list returned in the response is ASCII-sorted by vault name.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "The maximum number of vaults to be returned. The default limit is 1000. The number of vaults returned might be fewer than the specified limit, but the number of returned vaults never exceeds the limit.",
+          "required": false
+        },
+        {
+          "name": "marker",
+          "type": "String",
+          "info": "A string used for pagination. The marker specifies the vault ARN after which the listing of vaults should begin.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVault",
+      "description": "This operation returns information about a vault, including the vault Amazon Resource Name (ARN), the date the vault was created, the number of archives contained within the vault, and the total size of all the archives in the vault. ",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVaultAccessPolicy",
+      "description": "This operation retrieves the access-policy subresource set on the vault. If there is no access policy set on the vault, the operation returns a 404 Not found error.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "initiateVaultLock",
+      "description": "This operation initiates the vault locking process by doing the following: Installing a vault lock policy on the specified vault; Setting the lock state of vault lock to InProgress; Returning a lock ID, which is used to complete the vault locking process.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "policy",
+          "type": "JSON",
+          "info": "The vault lock policy. See README for more details.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVaultLock",
+      "description": "This operation retrieves the following attributes from the lock-policy subresource set on the specified vault: The vault lock policy set on the vault, The state of the vault lock, which is either InProgess or Locked, When the lock ID expires. The lock ID is used to complete the vault locking process, When the vault lock was initiated and put into the InProgress state.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "abortVaultLock",
+      "description": "This operation aborts the vault locking process if the vault lock is not in the Locked state. If the vault lock is in the Locked state when this operation is requested, the operation returns an AccessDeniedException error. Aborting the vault locking process removes the vault lock policy from the specified vault.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "completeVaultLock",
+      "description": "This operation completes the vault locking process by transitioning the vault lock from the InProgress state to the Locked state, which causes the vault lock policy to become unchangeable. A vault lock is put into the InProgress state by calling InitiateVaultLock.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "lockId",
+          "type": "String",
+          "info": "The lockId value is the lock ID obtained from a InitiateVaultLock request.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVaultNotifications",
+      "description": "This operation retrieves the notification-configuration subresource of the specified vault.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getVaultTags",
+      "description": "This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteVaultTags",
+      "description": "This operation removes one or more tags from the set of tags attached to a vault.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "tagKyes",
+          "type": "JSON",
+          "info": "Array of strings. A list of tag keys. Each corresponding tag is removed from the vault. See README for more details.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteVaultNotifications",
+      "description": "This operation deletes the notification configuration set for a vault.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteVaultAccessPolicy",
+      "description": "This operation deletes the access policy associated with the specified vault.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteVault",
+      "description": "This operation deletes a vault. Amazon Glacier will delete a vault only if there are no archives in the vault as per the last inventory and there have been no writes to the vault since the last inventory. If either of these conditions is not satisfied, the vault deletion fails (that is, the vault is not removed) and Amazon Glacier returns an error.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "uploadArchive",
+      "description": "This operation adds an archive to a vault. For a successful upload, your data is durably persisted. In response, Amazon Glacier returns the archive ID in the x-amz-archive-id header of the response. You should save the archive ID returned so that you can access the archive later.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "sourceFile",
+          "type": "File",
+          "info": "The archived file to be uploaded.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "archiveDescription",
+          "type": "String",
+          "info": "The optional description of the archive you are uploading.",
+          "required": false
+        },
+        {
+          "name": "checksum",
+          "type": "String",
+          "info": "The SHA256 tree hash of the data being uploaded.",
+          "required": false
+        },
+        {
+          "name": "contentSHA256",
+          "type": "String",
+          "info": "A SHA256 hash of the content of the request body.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "deleteArchive",
+      "description": "This operation deletes an archive from a vault. Subsequent requests to initiate a retrieval of this archive will fail.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "archiveId",
+          "type": "String",
+          "info": "The ID of the archive to delete.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createMultipartUpload",
+      "description": "This operation initiates a multipart upload. Amazon Glacier creates a multipart upload resource and returns its ID in the response.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "partSize",
+          "type": "String",
+          "info": "The size of each part except the last, in bytes. The last part can be smaller than this part size. The part size must be a megabyte (1024 KB) multiplied by a power of 2, for example 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB (4096 MB).",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "archiveDescription",
+          "type": "String",
+          "info": "The archive description that you are uploading in parts.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "uploadArchivePart",
+      "description": "This operation uploads a part of an archive. You can upload archive parts in any order. You can also upload them in parallel. You can upload up to 10,000 parts for a multipart upload.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "uploadId",
+          "type": "String",
+          "info": "The upload ID of the multipart upload.",
+          "required": true
+        },
+        {
+          "name": "sourceFile",
+          "type": "File",
+          "info": "The archived file to be uploaded.",
+          "required": true
+        },
+        {
+          "name": "range",
+          "type": "String",
+          "info": "Identifies the range of bytes in the assembled archive that will be uploaded in this part. Amazon Glacier uses this information to assemble the archive in the proper sequence. The format of this header follows RFC 2616. An example: bytes 0-4194303/*.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "checksum",
+          "type": "String",
+          "info": "The SHA256 tree hash of the data being uploaded.",
+          "required": false
+        },
+        {
+          "name": "contentSHA256",
+          "type": "String",
+          "info": "A SHA256 hash of the content of the request body.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getMultipartUploads",
+      "description": "This operation lists in-progress multipart uploads for the specified vault. An in-progress multipart upload is a multipart upload that has been initiated by an InitiateMultipartUpload request, but has not yet been completed or aborted. The list returned in the List Multipart Upload response has no guaranteed order.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "Specifies the maximum number of uploads returned in the response body. If this value is not specified, the List Uploads operation returns up to 1,000 uploads.",
+          "required": false
+        },
+        {
+          "name": "marker",
+          "type": "String",
+          "info": "An opaque string used for pagination. This value specifies the upload at which the listing of uploads should begin. Get the marker value from a previous List Uploads response. You need only include the marker if you are continuing the pagination of results started in a previous List Uploads request.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getArchiveParts",
+      "description": "This operation lists the parts of an archive that have been uploaded in a specific multipart upload.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "uploadId",
+          "type": "String",
+          "info": "The upload ID of the multipart upload.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "Specifies the maximum number of uploads returned in the response body. If this value is not specified, the List Uploads operation returns up to 1,000 uploads.",
+          "required": false
+        },
+        {
+          "name": "marker",
+          "type": "String",
+          "info": "An opaque string used for pagination. This value specifies the upload at which the listing of uploads should begin. Get the marker value from a previous List Uploads response. You need only include the marker if you are continuing the pagination of results started in a previous List Uploads request.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "abortMultipartUpload",
+      "description": "This operation aborts a multipart upload identified by the upload ID.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "uploadId",
+          "type": "String",
+          "info": "The upload ID of the multipart upload to delete.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "completeMultipartUpload",
+      "description": "You call this operation to inform Amazon Glacier that all the archive parts have been uploaded and that Amazon Glacier can now assemble the archive from the uploaded parts. After assembling and saving the archive to the vault, Amazon Glacier returns the URI path of the newly created archive resource.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "uploadId",
+          "type": "String",
+          "info": "The upload ID of the multipart upload to delete.",
+          "required": true
+        },
+        {
+          "name": "archiveSize",
+          "type": "String",
+          "info": "The total size, in bytes, of the entire archive. This value should be the sum of all the sizes of the individual parts that you uploaded.",
+          "required": true
+        },
+        {
+          "name": "checksum",
+          "type": "String",
+          "info": "The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree hash of the individual parts. If the value you specify in the request does not match the SHA256 tree hash of the final assembled archive as computed by Amazon Glacier, Amazon Glacier returns an error and the request fails.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createJob",
+      "description": "This operation initiates a job of the specified type, which can be an archive retrieval or vault inventory retrieval.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "info": "The job type. You can initiate a job to retrieve an archive or get an inventory of a vault. Valid Values: archive-retrieval, inventory-retrieval",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "archiveId",
+          "type": "String",
+          "info": "The ID of the archive that you want to retrieve. This field is required only if Type is set to archive-retrieval.",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "info": "The optional description for the job.",
+          "required": false
+        },
+        {
+          "name": "format",
+          "type": "String",
+          "info": "When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid Values: CSV; JSON",
+          "required": false
+        },
+        {
+          "name": "retrievalByteRange",
+          "type": "String",
+          "info": "The byte range to retrieve for an archive retrieval. in the form \"StartByteValue-EndByteValue\" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned, which means that StartByteValue must be divisible by 1 MB, and the EndByteValue plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response.",
+          "required": false
+        },
+        {
+          "name": "SNSTopic",
+          "type": "String",
+          "info": "The Amazon SNS topic ARN where Amazon Glacier sends a notification when the job is completed, and the output is ready for you to download.",
+          "required": false
+        },
+        {
+          "name": "tier",
+          "type": "String",
+          "info": "The retrieval option to use for the archive retrieval. Standard is the default value used. Valid Values: Expedited; Standard; Bulk",
+          "required": false
+        },
+        {
+          "name": "startDate",
+          "type": "String",
+          "info": "The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.",
+          "required": false
+        },
+        {
+          "name": "endDate",
+          "type": "String",
+          "info": "The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "The maximum number of inventory items returned per vault inventory retrieval request.",
+          "required": false
+        },
+        {
+          "name": "marker",
+          "type": "String",
+          "info": "An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new Initiate Job request to obtain additional inventory items. If there are no more inventory items, this value is null.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getJobs",
+      "description": "This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "completed",
+          "type": "String",
+          "info": "The state of the jobs to return. You can specify true or false.",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "String",
+          "info": "The maximum number of jobs to be returned. The default limit is 1000. The number of jobs returned might be fewer than the specified limit but the number of returned jobs never exceeds the limit.",
+          "required": false
+        },
+        {
+          "name": "marker",
+          "type": "String",
+          "info": "An opaque string used for pagination that specifies the job at which the listing of jobs should begin. You get the marker value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request.",
+          "required": false
+        },
+        {
+          "name": "statuscode",
+          "type": "String",
+          "info": "The type of job status to return. Constraints: One of the values InProgress, Succeeded, or Failed.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getSingleJob",
+      "description": "This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "jobId",
+          "type": "String",
+          "info": "The ID of the job to describe.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "downloadJobOutput",
+      "description": "This operation downloads the output of the job you initiated using Initiate Job (POST jobs). Depending on the job type you specified when you initiated the job, the output will be either the content of an archive or a vault inventory.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "vaultName",
+          "type": "String",
+          "info": "The name of the vault.",
+          "required": true
+        },
+        {
+          "name": "jobId",
+          "type": "String",
+          "info": "The job ID whose data is downloaded.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "range",
+          "type": "String",
+          "info": "The range of bytes to retrieve from the output. For example, if you want to download the first 1,048,576 bytes, specify the range as bytes=0-1048575. By default, this operation downloads the entire output.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "setDataRetrievalPolicy",
+      "description": "This operation sets and then enacts a data retrieval policy in the region specified in the PUT request. You can set one policy per region for an AWS account. The policy is enacted within a few minutes of a successful PUT operation.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "strategy",
+          "type": "String",
+          "info": "The type of data retrieval policy to set. Valid values: BytesPerHour; FreeTier; None",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        },
+        {
+          "name": "bytesPerHour",
+          "type": "String",
+          "info": "The maximum number of bytes that can be retrieved in an hour. This field is required only if the value of the Strategy field is BytesPerHour.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getDataRetrievalPolicy",
+      "description": "This operation returns the current data retrieval policy for the account and region specified in the GET request.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getAccountProvisionedCapacity",
+      "description": "This operation lists the provisioned capacity for the specified AWS account.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "purchaseCapacity",
+      "description": "This operation purchases a provisioned capacity unit for an AWS account.",
+      "args": [
+        {
+          "name": "apiKey",
+          "type": "credentials",
+          "info": "API key obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "apiSecret",
+          "type": "credentials",
+          "info": "API secret obtained from Amazon.",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "String",
+          "info": "Region.",
+          "required": true
+        },
+        {
+          "name": "accountId",
+          "type": "String",
+          "info": "The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: \"-\".",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    }
+  ]
+}
