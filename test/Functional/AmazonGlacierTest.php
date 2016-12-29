@@ -45,11 +45,7 @@ class AmazonGlacierTest extends BaseTestCase {
         
         foreach($routes as $file) {
             $var = '{  
-                        "args":{  
-                            "apiKey": "AKIAJUE5X2UUUDCNXLEA",
-                            "apiSecret": "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",
-                            "region": "eu-west-1"
-                        }
+                        "args":{}
                     }';
             $post_data = json_decode($var, true);
 
