@@ -688,7 +688,7 @@
           "required": true
         },
         {
-          "name": "tagKyes",
+          "name": "tagKeys",
           "type": "JSON",
           "info": "Array of strings. A list of tag keys. Each corresponding tag is removed from the vault. See README for more details.",
           "required": true
