@@ -199,9 +199,14 @@
         },
         {
           "name": "events",
-          "type": "JSON",
+          "type": "List",
           "info": "Array of strings. An array of one or more events for which you want Amazon Glacier to send notification. Valid Values: ArchiveRetrievalCompleted; InventoryRetrievalCompleted",
-          "required": true
+          "required": true,
+          "structure": {
+            "name": "event",
+            "type": "String",
+            "info": "Single event"
+          }
         },
         {
           "name": "SNSTopic",
@@ -689,9 +694,14 @@
         },
         {
           "name": "tagKeys",
-          "type": "JSON",
+          "type": "List",
           "info": "Array of strings. A list of tag keys. Each corresponding tag is removed from the vault. See README for more details.",
-          "required": true
+          "required": true,
+          "structure": {
+            "name": "tagKey",
+            "type": "String",
+            "info": "Single tagKey"
+          }
         },
         {
           "name": "accountId",
@@ -1373,7 +1383,8 @@
         },
         {
           "name": "type",
-          "type": "String",
+          "type": "Select",
+          "options": ["archive-retrieval", "inventory-retrieval"],
           "info": "The job type. You can initiate a job to retrieve an archive or get an inventory of a vault. Valid Values: archive-retrieval, inventory-retrieval",
           "required": true
         },
@@ -1397,7 +1408,8 @@
         },
         {
           "name": "format",
-          "type": "String",
+          "type": "Select",
+          "options": ["CSV", "JSON"],
           "info": "When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid Values: CSV; JSON",
           "required": false
         },
@@ -1415,19 +1427,20 @@
         },
         {
           "name": "tier",
-          "type": "String",
+          "type": "Select",
+          "options": ["Expedited", "Standard", "Bulk"],
           "info": "The retrieval option to use for the archive retrieval. Standard is the default value used. Valid Values: Expedited; Standard; Bulk",
           "required": false
         },
         {
           "name": "startDate",
-          "type": "String",
+          "type": "DatePicker",
           "info": "The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.",
           "required": false
         },
         {
           "name": "endDate",
-          "type": "String",
+          "type": "DatePicker",
           "info": "The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.",
           "required": false
         },
@@ -1509,7 +1522,8 @@
         },
         {
           "name": "statuscode",
-          "type": "String",
+          "type": "Select",
+          "options": ["InProgress", "Succeeded", "Failed"],
           "info": "The type of job status to return. Constraints: One of the values InProgress, Succeeded, or Failed.",
           "required": false
         }
@@ -1659,7 +1673,8 @@
         },
         {
           "name": "strategy",
-          "type": "String",
+          "type": "Select",
+          "options":["BytesPerHour", "FreeTier", "None"],
           "info": "The type of data retrieval policy to set. Valid values: BytesPerHour; FreeTier; None",
           "required": true
         },

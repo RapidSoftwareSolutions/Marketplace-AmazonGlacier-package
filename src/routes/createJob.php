@@ -42,10 +42,12 @@ $app->post('/api/AmazonGlacier/createJob', function ($request, $response, $args)
         $body['jobParameters']['Tier'] = $post_data['args']['tier'];
     }
     if (!empty($post_data['args']['startDate'])) {
-        $body['jobParameters']['InventoryRetrievalParameters']['StartDate'] = $post_data['args']['startDate'];
+        $dateTime = new DateTime($post_data['args']['startDate']);
+        $body['jobParameters']['InventoryRetrievalParameters']['StartDate'] = $dateTime->format('Y-m-d\TH:i:s\Z');
     }
     if (!empty($post_data['args']['endDate'])) {
-        $body['jobParameters']['InventoryRetrievalParameters']['EndDate'] = $post_data['args']['endDate'];
+        $dateTime = new DateTime($post_data['args']['endDate']);
+        $body['jobParameters']['InventoryRetrievalParameters']['EndDate'] = $dateTime->format('Y-m-d\TH:i:s\Z');
     }
     if (!empty($post_data['args']['limit'])) {
         $body['jobParameters']['InventoryRetrievalParameters']['Limit'] = $post_data['args']['limit'];

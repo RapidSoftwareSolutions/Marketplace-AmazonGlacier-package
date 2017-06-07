@@ -11,6 +11,16 @@ Amazon Glacier is an extremely low-cost storage service that provides durable st
 2. Create new group in Groups section at the left side with necessary polices
 3. Create new user and assign to existing group
 4. After creating user you will see credentials
+
+## Custom datatypes: 
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]``` 
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+ 
  
 ## AmazonGlacier.createVault
 This operation creates a new vault with the specified name.  The name of the vault must be unique within a region for an AWS account.
@@ -91,7 +101,7 @@ This operation configures notifications that will be sent when specific events h
 | apiSecret| credentials| API secret obtained from Amazon.
 | region   | String     | Region.
 | vaultName| String     | The name of the vault.
-| events   | JSON       | Array of strings. An array of one or more events for which you want Amazon Glacier to send notification. Valid Values: ArchiveRetrievalCompleted; InventoryRetrievalCompleted
+| events   | List       | Array of strings. An array of one or more events for which you want Amazon Glacier to send notification. Valid Values: ArchiveRetrievalCompleted; InventoryRetrievalCompleted
 | SNSTopic | String     | The Amazon SNS topic ARN.
 | accountId| String     | The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: "-".
 
@@ -234,7 +244,7 @@ This operation removes one or more tags from the set of tags attached to a vault
 | apiSecret| credentials| API secret obtained from Amazon.
 | region   | String     | Region.
 | vaultName| String     | The name of the vault.
-| tagKeys  | JSON       | Array of strings. A list of tag keys. Each corresponding tag is removed from the vault. See README for more details.
+| tagKeys  | List       | Array of strings. A list of tag keys. Each corresponding tag is removed from the vault. See README for more details.
 | accountId| String     | The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: "-".
 
 #### tagKeys format
@@ -393,7 +403,7 @@ This operation initiates a job of the specified type, which can be an archive re
 | apiSecret         | credentials| API secret obtained from Amazon.
 | region            | String     | Region.
 | vaultName         | String     | The name of the vault.
-| type              | String     | The job type. You can initiate a job to retrieve an archive or get an inventory of a vault. Valid Values: archive-retrieval, inventory-retrieval
+| type              | Select     | The job type. You can initiate a job to retrieve an archive or get an inventory of a vault. Valid Values: archive-retrieval, inventory-retrieval
 | accountId         | String     | The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: "-".
 | archiveId         | String     | The ID of the archive that you want to retrieve. This field is required only if Type is set to archive-retrieval.
 | description       | String     | The optional description for the job.
@@ -401,8 +411,8 @@ This operation initiates a job of the specified type, which can be an archive re
 | retrievalByteRange| String     | The byte range to retrieve for an archive retrieval. in the form "StartByteValue-EndByteValue" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned, which means that StartByteValue must be divisible by 1 MB, and the EndByteValue plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response.
 | SNSTopic          | String     | The Amazon SNS topic ARN where Amazon Glacier sends a notification when the job is completed, and the output is ready for you to download.
 | tier              | String     | The retrieval option to use for the archive retrieval. Standard is the default value used. Valid Values: Expedited; Standard; Bulk
-| startDate         | String     | The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.
-| endDate           | String     | The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.
+| startDate         | Datepicker     | The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.
+| endDate           | Datepicker     | The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. Valid Values: A string representation of ISO 8601 date format YYYY-MM-DDThh:mm:ssTZD in seconds, for example 2013-03-20T17:03:43Z.
 | limit             | String     | The maximum number of inventory items returned per vault inventory retrieval request.
 | marker            | String     | An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new Initiate Job request to obtain additional inventory items. If there are no more inventory items, this value is null.
 
@@ -419,7 +429,7 @@ This operation lists jobs for a vault, including jobs that are in-progress and j
 | completed | String     | The state of the jobs to return. You can specify true or false.
 | limit     | String     | The maximum number of jobs to be returned. The default limit is 1000. The number of jobs returned might be fewer than the specified limit but the number of returned jobs never exceeds the limit.
 | marker    | String     | An opaque string used for pagination that specifies the job at which the listing of jobs should begin. You get the marker value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request.
-| statuscode| String     | The type of job status to return. Constraints: One of the values InProgress, Succeeded, or Failed.
+| statuscode| Select     | The type of job status to return. Constraints: One of the values InProgress, Succeeded, or Failed.
 
 ## AmazonGlacier.getSingleJob
 This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job.
@@ -454,7 +464,7 @@ This operation sets and then enacts a data retrieval policy in the region specif
 | apiKey      | credentials| API key obtained from Amazon.
 | apiSecret   | credentials| API secret obtained from Amazon.
 | region      | String     | Region.
-| strategy    | String     | The type of data retrieval policy to set. Valid values: BytesPerHour; FreeTier; None
+| strategy    | Select     | The type of data retrieval policy to set. Valid values: BytesPerHour; FreeTier; None
 | accountId   | String     | The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. Default value: "-".
 | bytesPerHour| String     | The maximum number of bytes that can be retrieved in an hour. This field is required only if the value of the Strategy field is BytesPerHour.
 
